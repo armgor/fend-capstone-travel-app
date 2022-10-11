@@ -2,13 +2,13 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #fff7f3;
 }
 
-main {
-    flex: 2;
-}
-
-section {
-    max-width: 800px;
-    margin: 50px auto;
+.box {
+    display: flex;
+    border: 1px solid red;
+    align-items: center;
+    justify-content: center;
+    // align-content: center;
 }
