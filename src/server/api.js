@@ -6,8 +6,8 @@ const fetch = require('node-fetch')
 /**
  * Create object with API base URLs and endpoints
  */
-apiInfo = {
-    'geonames_base_url': 'http://api.geonames.org/postalCodeSearchJSON?maxRows=10&placename='
+let apiInfo = {
+    'geonames_base_url': 'http://api.geonames.org/postalCodeSearchJSON?maxRows=1&placename='
 }
 
 /**
@@ -25,8 +25,18 @@ const makeAsyncAPICall = async(url='') => {
 
 async function getCoordinates(url='') {
     const geoNamesData = await makeAsyncAPICall(url);
-    // console.log(geoNamesData);
-    return geoNamesData;
+    if (geoNamesData['postalCodes'].length > 0)  
+        return {
+            'ok': true,
+            'country': geoNamesData['postalCodes'][0]['countryCode'],
+            'lat': geoNamesData['postalCodes'][0]['lat'],
+            'lng': geoNamesData['postalCodes'][0]['lng'],
+            'place': geoNamesData['postalCodes'][0]['placeName']
+        };
+    else 
+        return {
+            'ok': false
+        };
 }
 
 

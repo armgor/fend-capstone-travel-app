@@ -30,13 +30,8 @@ app.listen(8081, function () {
     console.log('Example app listening on port 8081!')
 })
 
-app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
-})
-
 app.post('/addTrip', function(req, res) {
-    console.log('addTrip post reached')
-    getCoordinates(apiInfo.geonames_base_url + `Orlando&username=${parsed_env.GEONAMES_USERNAME}`).
+    getCoordinates(apiInfo.geonames_base_url + `${req.body.destination}&username=${parsed_env.GEONAMES_USERNAME}`).
     then(function(data) {
         res.send(data)
     })
