@@ -9,6 +9,11 @@ body {
     display: flex;
     border: 1px solid red;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
     // align-content: center;
+}
+
+#place__holder {
+    background-color: #fff7f3;
+    min-height:15vh;
 }

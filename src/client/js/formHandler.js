@@ -1,5 +1,5 @@
 const fetch = require("node-fetch")
-const { isDateValid, isDateInPast, daysBetweenDates} = require('./app')
+const { isDateValid, isDateInPast, daysBetweenDates } = require('./app')
 
 
 const makeAsyncServerPost = async(url = '', data = {}) => {
@@ -66,23 +66,24 @@ function addTrip(event) {
     // compute how many days away the trip is
     days_to_trip = daysBetweenDates(new Date(), new Date(trip_start_date))
 
-    const data = {
-        destination: trip_dest
-    }
-
     console.log(trip_start_date)
     console.log(trip_end_date)
     console.log(trip_dur)
-    console.log(trip_dest)
+    console.log(trip_dest.trim())
     console.log(days_to_trip)
+
+    const data = {
+        'destination': trip_dest.trim(),
+        'days_to_trip': days_to_trip
+    }
 
     makeAsyncServerPost('http://localhost:8081/addTrip', data)
     .then(function(res) {
         // document.getElementById('results').innerHTML = res.message
-        if (!res.ok) {
-            alert(`No results found for ${trip_dest}. Please enter another trip destination.`)
-            return;
-        }
+        // if (!res.ok) {
+        //     alert(`No results found for ${trip_dest}. Please enter another trip destination.`)
+        //     return;
+        // }
         console.log(res)
     })
 }

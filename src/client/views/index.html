@@ -12,23 +12,31 @@
         </header>
         <!-- Page main section -->
         <main>
-            <div class="menu__bar">
-                <button class="menu__button" type="button">add trip</button>
-            </div>
             <section>
-                <div class="box" id="trip__img">
+                <div class="" id="trip__img">
                     <!-- <img src="../media/confused_dog.jpg" alt="Vacation City"> -->
                 </div>
-                <div class="box" id="trip__info">
-                    <form class="" onsubmit="return Client.addTrip(event)">
-                        <input id="trip_dest" type="text" name="trip_place" value="" placeholder="Trip Destination (e.g. Orlando)">
-                        <input id="trip_start" type="date" name="trip_start">
-                        <input id="trip_end" type="date" name="trip_end">
-                        <input type="submit" name="" value="submit" onclick="return Client.addTrip(event)" onsubmit="return Client.addTrip(event)">
+                <div class="" id="trip__info">
+                    <form onsubmit="return Client.addTrip(event)">
+                        <h2>Enter Trip Information</h3>
+                        <div class="trip_info_entry">
+                            <label for="trip_place">Destination:</label>
+                            <input id="trip_dest" type="text" name="trip_place" value="" placeholder="Enter Location"> 
+                        </div>
+                        <div class="trip_info_entry">
+                            <label for="trip_start">Start Date:</label>
+                            <input id="trip_start" type="date" name="trip_start">
+                        </div>
+                        <div class="trip_info_entry">
+                            <label for="trip_end">End Date (optional):</label>
+                            <input id="trip_end" type="date" name="trip_end">
+                        </div>
+                        <input type="submit" name="" value="add trip" onclick="return Client.addTrip(event)" onsubmit="return Client.addTrip(event)">
                     </form>                        
                 </div>
             </section>
         </main>
+        <section id="place__holder" class=""></section>
         <!-- Page footer -->
         <footer class="page__footer">
             <p>FEND Capstone - Travel App</p>
