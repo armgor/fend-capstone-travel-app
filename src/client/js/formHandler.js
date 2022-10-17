@@ -21,6 +21,22 @@ const makeAsyncServerPost = async(url = '', data = {}) => {
     }
 };
 
+const getProjectData = async (url = '') => {
+    const request = await fetch(url);
+    try {
+        const projectData = await request.json();
+        return projectData;
+    } catch (error) {
+        console.log("error", error);
+    }
+};
+
+async function updateUI() {
+    const projectData = await getProjectData('/getTrip');
+
+    // check if GeoNames returned data, i.e. if the place name was found
+}
+
 
 function addTrip(event) {
     event.preventDefault()
@@ -85,8 +101,9 @@ function addTrip(event) {
         //     return;
         // }
         console.log(res)
+        updateUI()
     })
 }
 
 
-export { addTrip }
+export { addTrip, updateUI }

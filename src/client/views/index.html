@@ -18,7 +18,7 @@
                 </div>
                 <div class="" id="trip__info">
                     <form onsubmit="return Client.addTrip(event)">
-                        <h2>Enter Trip Information</h3>
+                        <h2>Enter Trip Information</h2>
                         <div class="trip_info_entry">
                             <label for="trip_place">Destination:</label>
                             <input id="trip_dest" type="text" name="trip_place" value="" placeholder="Enter Location"> 
@@ -31,16 +31,20 @@
                             <label for="trip_end">End Date (optional):</label>
                             <input id="trip_end" type="date" name="trip_end">
                         </div>
-                        <input type="submit" name="" value="add trip" onclick="return Client.addTrip(event)" onsubmit="return Client.addTrip(event)">
-                    </form>                        
+                        <input type="submit" name="" value="submit trip info" onclick="return Client.addTrip(event)" onsubmit="return Client.addTrip(event)">
+                    </form>
+                    <h2>Trip Summary</h2>
+                </div>
+                <div id="trip__weather">
+                    <h2>Weather Information</h2>
+                    <div id="trip_weather_entries" class=""></div>
                 </div>
             </section>
         </main>
-        <section id="place__holder" class=""></section>
+        <!-- <section id="place__holder" class=""></section> -->
         <!-- Page footer -->
         <footer class="page__footer">
             <p>FEND Capstone - Travel App</p>
         </footer>
-
     </body>
 </html>
