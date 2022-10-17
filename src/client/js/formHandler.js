@@ -1,42 +1,40 @@
 const fetch = require("node-fetch")
-const { isDateValid, isDateInPast, daysBetweenDates } = require('./app')
+const { isDateValid, isDateInPast, daysBetweenDates, makeAsyncServerPost, getProjectData, makeWeatherElement } = require('./app')
 
-
-const makeAsyncServerPost = async(url = '', data = {}) => {
-
-    const response = await fetch(url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data),
-    });
-    try {
-        const server_response = await response.json();
-        // console.log(server_response);
-        return server_response;
-    } catch (error) {
-        console.log('error: ', error)
-    }
-};
-
-const getProjectData = async (url = '') => {
-    const request = await fetch(url);
-    try {
-        const projectData = await request.json();
-        return projectData;
-    } catch (error) {
-        console.log("error", error);
-    }
-};
-
-async function updateUI() {
+async function updateUI(data) {
+    
     const projectData = await getProjectData('/getTrip');
 
     // check if GeoNames returned data, i.e. if the place name was found
-}
+    if (!projectData.geoData.ok) {
+        alert(`No results found for ${data.destination}. Please try another destination.`);
+        return;
+    }
+    
+    // add location image
+    if (!projectData.imgData.ok)
+        alert(`No picture available for ${projectData.geoData.place}.`);
+    else
+        document.querySelector('#trip__img img').src = projectData.imgData.img;
 
+    // TODO - check if getting current weather or getting forecast
+    // TODO - format date
+    // TODO - check if trip is 16 days away
+    // TODO - get the last 5 days only, not first 5 days
+    // TODO - refactor code below to add elements to dome
+
+    // add the weather information
+    const fragment = document.createDocumentFragment();
+    const targetDOMElement = document.querySelector("#trip_weather_entries");
+
+    // create elements containing weather information
+    for (let i=0; i < Math.min(5, projectData.weatherData.length); i++) {
+        fragment.appendChild(makeWeatherElement(projectData.weatherData[i]))
+    }
+
+    targetDOMElement.innerHTML = '';
+    targetDOMElement.appendChild(fragment);
+}
 
 function addTrip(event) {
     event.preventDefault()
@@ -90,7 +88,10 @@ function addTrip(event) {
 
     const data = {
         'destination': trip_dest.trim(),
-        'days_to_trip': days_to_trip
+        'days_to_trip': days_to_trip,
+        'trip_start': trip_start_date,
+        'trip_end': trip_end_date,
+        'trip_dur': trip_dur
     }
 
     makeAsyncServerPost('http://localhost:8081/addTrip', data)
@@ -100,8 +101,8 @@ function addTrip(event) {
         //     alert(`No results found for ${trip_dest}. Please enter another trip destination.`)
         //     return;
         // }
-        console.log(res)
-        updateUI()
+        console.log(res);
+        updateUI(data);
     })
 }
 

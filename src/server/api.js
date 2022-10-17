@@ -59,10 +59,10 @@ async function getWeatherForecast(url='') {
 async function getWeatherCurrent(url='') {
     const weatherCurr = await makeAsyncAPICall(url);
     return {
-        'weatherData': {
+        'weatherData': [{
             'temp': weatherCurr['data'][0]['temp'],
             'icon': weatherCurr['data'][0]['weather']['icon']
-        }
+        }]
     }
 }
 
