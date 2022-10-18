@@ -33,7 +33,7 @@ const makeAsyncAPICall = async(url='') => {
  */
 async function getCoordinates(url='') {
     const geoNamesData = await makeAsyncAPICall(url);
-    if (geoNamesData['postalCodes'].length > 0)  
+    if (geoNamesData['postalCodes'].length > 0)
         return {
             'ok': true,
             'country': geoNamesData['postalCodes'][0]['countryCode'],

@@ -79,7 +79,7 @@ function makeWeatherElement(weatherData) {
     } else {
         // we have forecast weather data
         newP1.innerHTML = `L: ${weatherData.low}F<br/>H: ${weatherData.high}F`;
-        newP2.textContent = dateFormatted(weatherData.day);        
+        newP2.textContent = dateFormatted(weatherData.day);
     }
     
     newDiv.classList.add('trip_weather_entry');

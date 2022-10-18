@@ -67,7 +67,7 @@ app.post('/addTrip', function(req, res) {
     })
     .then(function(data) {
         projectData['weatherData'] = data['weatherData'];  
-        // get an image. Replace spaces in the query string with "+"      
+        // get an image. Replace spaces in the query string with "+"
         return getPlaceImage(apiInfo.pixabay_base_url + `${parsed_env.PIXABAY_API_KEY}&q=${req.body.destination.replace(/\s/g, '+')}`);
     })
     .then(function(data) {

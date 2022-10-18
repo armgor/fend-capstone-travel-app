@@ -40,7 +40,7 @@ async function updateUI(data) {
                       `<strong>${dateFormatted(data.trip_start)}</strong>.<br/><br/>`;
     // add trip end duration info if user entered an end date for the trip
     if (data.trip_end !== '') {
-        tripSummary = tripSummary + 
+        tripSummary = tripSummary +
                       `Your trip ends on <strong>${dateFormatted(data.trip_end)}</strong>. ` +
                       `Trip duration is <strong>${data.trip_dur}</strong> day(s).`;
     }
