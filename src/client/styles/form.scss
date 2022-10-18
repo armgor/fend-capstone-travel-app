@@ -10,13 +10,11 @@ form {
 
     .trip_info_entry {
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        column-gap: 1em;    
+        flex-direction: column;
     }
 
     label {
-        width: 60%;
+        width: 100%;
         text-align: left;
     }
 }
@@ -26,4 +24,36 @@ input {
     width: 100%;
     line-height: 16px;
     margin: 10px 0;
+}
+
+@media (min-width: 475px) and (max-width: 900px) {
+    form {
+        .trip_info_entry {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: 1em;    
+        }
+    
+        label {
+            width: 60%;
+            text-align: left;
+        }
+    }
+}
+
+@media (min-width: 901px) {
+    form {
+        .trip_info_entry {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: 1em;    
+        }
+    
+        label {
+            width: 60%;
+            text-align: left;
+        }
+    }
 }

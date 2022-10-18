@@ -53,10 +53,22 @@ app.post('/addTrip', function(req, res) {
         }
         if (req.body.days_to_trip <= 7)
             // trip is within a week, return current weather info
-            return getWeatherCurrent(apiInfo.weatherbit_curr_base_url + `${parsed_env.WEATHERBIT_API_KEY}&lat=${data.lat}&lon=${data.lng}`);
+            // return getWeatherCurrent(apiInfo.weatherbit_curr_base_url + `${parsed_env.WEATHERBIT_API_KEY}&lat=${data.lat}&lon=${data.lng}`);
+            return {'weatherData': [{
+                'day': '2022-10-21',
+                'low': 75.1,
+                'high': 83.2,
+                'icon': 'c02n'
+            }]}
         else
+            return {'weatherData': [{
+                'day': '2022-10-21',
+                'low': 75.1,
+                'high': 83.2,
+                'icon': 'c02n'
+            }]}
             // trip is more than 7 days away but within 16 weeks, get future forecast
-            return getWeatherForecast(apiInfo.weatherbit_fcast_base_url + `${parsed_env.WEATHERBIT_API_KEY}&lat=${data.lat}&lon=${data.lng}`);
+            // return getWeatherForecast(apiInfo.weatherbit_fcast_base_url + `${parsed_env.WEATHERBIT_API_KEY}&lat=${data.lat}&lon=${data.lng}`);
     })
     .then(function(data) {
         projectData['weatherData'] = data['weatherData'];        

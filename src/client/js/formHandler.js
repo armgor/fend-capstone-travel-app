@@ -17,11 +17,10 @@ async function updateUI(data) {
     else
         document.querySelector('#trip__img img').src = projectData.imgData.img;
 
-    // TODO - check if getting current weather or getting forecast
-    // TODO - format date
     // TODO - check if trip is 16 days away
     // TODO - get the last 5 days only, not first 5 days
-    // TODO - refactor code below to add elements to dome
+    // TODO - dynamically add weather information
+    // TODO - document code and write ReadME
 
     // add the weather information
     const fragment = document.createDocumentFragment();
