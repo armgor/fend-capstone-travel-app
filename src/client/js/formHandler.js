@@ -1,5 +1,5 @@
 const fetch = require("node-fetch")
-const { isDateValid, isDateInPast, daysBetweenDates, makeAsyncServerPost, getProjectData, makeWeatherElement } = require('./app')
+const { isDateValid, isDateInPast, daysBetweenDates, makeAsyncServerPost, getProjectData, makeWeatherElement, dateFormatted } = require('./app')
 
 async function updateUI(data) {
     
@@ -11,11 +11,26 @@ async function updateUI(data) {
         return;
     }
     
-    // add location image
-    if (!projectData.imgData.ok)
-        alert(`No picture available for ${projectData.geoData.place}.`);
-    else
-        document.querySelector('#trip__img img').src = projectData.imgData.img;
+    // add the trip summary
+    const tripSummaryElement = document.querySelector("#trip__summary");
+    tripSummaryElement.innerHTML = '';
+    const newH2 = document.createElement('h2');
+    const newP = document.createElement('p');
+    newH2.innerText = 'Trip Summary';
+    let tripSummary = `Your trip to <strong>${projectData.geoData.place}</strong> ` +
+                      `is in <strong>${data.days_to_trip}</strong> day(s), starting on ` +
+                      `<strong>${dateFormatted(data.trip_start)}</strong>.<br/><br/>`;
+    // add trip end duration info
+    if (data.trip_end !== '') {
+        tripSummary = tripSummary + 
+                      `Your trip ends on <strong>${dateFormatted(data.trip_end)}</strong>. ` +
+                      `Trip duration is <strong>${data.trip_dur}</strong> day(s).`;
+    }
+    newP.innerHTML = tripSummary;
+    tripSummaryElement.appendChild(newH2);
+    tripSummaryElement.appendChild(newP);
+
+    // <h2>Trip Summary</h2>
 
     // TODO - check if trip is 16 days away
     // TODO - get the last 5 days only, not first 5 days
@@ -24,15 +39,21 @@ async function updateUI(data) {
 
     // add the weather information
     const fragment = document.createDocumentFragment();
-    const targetDOMElement = document.querySelector("#trip_weather_entries");
+    const tripWeatherElement = document.querySelector("#trip_weather_entries");
 
     // create elements containing weather information
     for (let i=0; i < Math.min(5, projectData.weatherData.length); i++) {
         fragment.appendChild(makeWeatherElement(projectData.weatherData[i]))
     }
 
-    targetDOMElement.innerHTML = '';
-    targetDOMElement.appendChild(fragment);
+    tripWeatherElement.innerHTML = '';
+    tripWeatherElement.appendChild(fragment);
+
+    // add location image
+    if (!projectData.imgData.ok)
+        alert(`No picture available for ${projectData.geoData.place}.`);
+    else
+        document.querySelector('#trip__img img').src = projectData.imgData.img;
 }
 
 function addTrip(event) {
@@ -95,12 +116,6 @@ function addTrip(event) {
 
     makeAsyncServerPost('http://localhost:8081/addTrip', data)
     .then(function(res) {
-        // document.getElementById('results').innerHTML = res.message
-        // if (!res.ok) {
-        //     alert(`No results found for ${trip_dest}. Please enter another trip destination.`)
-        //     return;
-        // }
-        console.log(res);
         updateUI(data);
     })
 }

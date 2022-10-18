@@ -40,6 +40,7 @@ main {
             width: 100%;
             margin: auto;
             border-bottom: thin solid darkgray;
+            margin-bottom: 0.83em;
 
         }
 
@@ -80,6 +81,10 @@ main {
             }
         }
     }
+
+    strong {
+        font-weight: bold;
+    }    
 
     h2 {
         display: block;
