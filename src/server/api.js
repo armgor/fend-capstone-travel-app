@@ -26,6 +26,11 @@ const makeAsyncAPICall = async(url='') => {
     }
 }
 
+/**
+ * Async function that uses the makeAsyncAPICall() async function to make the GeoNames API call,
+ * parse the results and return the relevant info for this project.
+ * If GeoNames didn't return a result, the the 'ok' key will be set to "false" for the client.
+ */
 async function getCoordinates(url='') {
     const geoNamesData = await makeAsyncAPICall(url);
     if (geoNamesData['postalCodes'].length > 0)  
@@ -42,6 +47,11 @@ async function getCoordinates(url='') {
         };
 }
 
+/**
+ * Async function that uses the makeAsyncAPICall() async function to make an API call to the 
+ * WeatherBit Forecast API endpoint. The results are parsed into an object containing an 
+ * array of objects, one object per day
+ */
 async function getWeatherForecast(url='') {
     const weatherFcast = await makeAsyncAPICall(url);
     let data = [];
@@ -56,6 +66,11 @@ async function getWeatherForecast(url='') {
     return {'weatherData': data};
 }
 
+/**
+ * Async function that uses the makeAsyncAPICall() async function to make an API call to the 
+ * WeatherBit Current Weather API endpoint. The results are parsed into an object containing an 
+ * array of a single object.
+ */
 async function getWeatherCurrent(url='') {
     const weatherCurr = await makeAsyncAPICall(url);
     return {
@@ -66,6 +81,11 @@ async function getWeatherCurrent(url='') {
     }
 }
 
+/**
+ * Async function that uses the makeAsyncAPICall() async function to make an API call to the 
+ * Pixabay API endpoint. The results are parsed and the webformatURL is returned in an object
+ * to the caller. If no image was found, the "ok" key will be set to "false".
+ */
 async function getPlaceImage(url='') {
     const imgData = await makeAsyncAPICall(url);
     if (imgData['hits'].length < 1)
@@ -79,5 +99,7 @@ async function getPlaceImage(url='') {
     }};
 }
 
-
+/**
+ * Export the functions and objects
+ */
 module.exports = { getCoordinates, apiInfo, getWeatherForecast, getWeatherCurrent, getPlaceImage}

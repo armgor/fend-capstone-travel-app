@@ -1,5 +1,6 @@
 /**
- * Function to validate date formats and values
+ * This function checks that date formats are valid.
+ * Since I am using a date selector in the HTML, this is redundant.
  */
 function isDateValid(tripDate='') {
     var res = tripDate.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
@@ -9,6 +10,9 @@ function isDateValid(tripDate='') {
         return true;
 }
 
+/**
+ * Check if user entered date is in the past with respect to another date
+ */
 function isDateInPast(startDate=new Date('2022-01-01'), endDate=new Date()) {
     if (startDate - endDate < 0)
         return true;
@@ -16,14 +20,23 @@ function isDateInPast(startDate=new Date('2022-01-01'), endDate=new Date()) {
         return false;
 }
 
+/**
+ * Computes number of dates between two dates.
+ */
 function daysBetweenDates(startDate=new Date('2022-01-01'), endDate=new Date('2022-01-01')) {
     return Math.round((endDate-startDate)/(1000*60*60*24));
 }
 
+/**
+ * Function that pads digits with 0s. This is used for date formatting
+ */
 function padToDigits(num, pad) {
     return num.toString().padStart(pad, '0');
 }
 
+/**
+ * Function that outputs a Date() in MM/DD/YYYY format using the padToDigits() function.
+ */
 function dateFormatted(aDateString) {
     let dt = new Date(aDateString);
     return [padToDigits(dt.getUTCMonth()+1, 2),
@@ -31,6 +44,9 @@ function dateFormatted(aDateString) {
             dt.getUTCFullYear()].join('/')
 }
 
+/**
+ * Find index in date array that's closest to dateStrToCompare
+ */
 function getClosestIndex(dateStrArray, dateStrToCompare) {
     // compute the difference between all array elements to the date I am comparing against
     let temp = dateStrArray.map(dateStr => Math.abs(new Date(dateStr)-new Date(dateStrToCompare)));
@@ -39,9 +55,14 @@ function getClosestIndex(dateStrArray, dateStrToCompare) {
     return temp.indexOf(Math.min(...temp));
 }
 
+/**
+ * Helper function to create a div containing the required info,
+ * including the icon, the weather, etc.
+ */
 function makeWeatherElement(weatherData) {
-    // create a document fragment and a few elements for the info
+    // create a require.context for dynamically selecting weather icons during runtime
     const imgDir = require.context('../media/weatherbit_icons/', false);
+    // create a document fragment and a few elements for the info
     const newDiv = document.createElement('div');
     const newP1 = document.createElement('p');
     const newP2 = document.createElement('p');
@@ -71,6 +92,9 @@ function makeWeatherElement(weatherData) {
     return newDiv
 }
 
+/**
+ * Function for making async POST requests to server
+ */
 const makeAsyncServerPost = async(url = '', data = {}) => {
 
     const response = await fetch(url, {
@@ -90,6 +114,9 @@ const makeAsyncServerPost = async(url = '', data = {}) => {
     }
 };
 
+/**
+ * Function for making async GET requests to server. 
+ */
 const getProjectData = async (url = '') => {
     const request = await fetch(url);
     try {

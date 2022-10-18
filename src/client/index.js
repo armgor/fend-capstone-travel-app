@@ -1,6 +1,7 @@
 import { addTrip, updateUI } from './js/formHandler'
 import img from './media/confused_dog.jpg'
 
+// Start the page with a dummy image
 const myImg = new Image();
 myImg.src = img;
 document.querySelector("#trip__img").appendChild(myImg);
