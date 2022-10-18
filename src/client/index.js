@@ -6,6 +6,10 @@ const myImg = new Image();
 myImg.src = img;
 document.querySelector("#trip__img").appendChild(myImg);
 
+// add an event listener to the submit trip info button
+document.querySelector("#trip_submit").addEventListener('click', function(event) {
+    addTrip(event)
+})
 
 import './styles/main.scss'
 import './styles/form.scss'

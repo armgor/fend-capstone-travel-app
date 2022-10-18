@@ -17,7 +17,7 @@
                     <!-- <img src="../media/confused_dog.jpg" alt="Vacation City"> -->
                 </div>
                 <div class="" id="trip__info">
-                    <form onsubmit="return Client.addTrip(event)">
+                    <form>
                         <h2>Enter Trip Information</h2>
                         <div class="trip_info_entry">
                             <label for="trip_place">Destination:</label>
@@ -31,7 +31,7 @@
                             <label for="trip_end">End Date (optional):</label>
                             <input id="trip_end" type="date" name="trip_end">
                         </div>
-                        <input type="submit" name="" value="submit trip info" onclick="return Client.addTrip(event)" onsubmit="return Client.addTrip(event)">
+                        <input id="trip_submit" type="submit" name="" value="submit trip info">
                     </form>
                     <div id="trip__summary"></div>
                 </div>
