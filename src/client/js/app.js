@@ -31,6 +31,14 @@ function dateFormatted(aDateString) {
             dt.getUTCFullYear()].join('/')
 }
 
+function getClosestIndex(dateStrArray, dateStrToCompare) {
+    // compute the difference between all array elements to the date I am comparing against
+    let temp = dateStrArray.map(dateStr => Math.abs(new Date(dateStr)-new Date(dateStrToCompare)));
+
+    // get the index with the min value
+    return temp.indexOf(Math.min(...temp));
+}
+
 function makeWeatherElement(weatherData) {
     // create a document fragment and a few elements for the info
     const imgDir = require.context('../media/weatherbit_icons/', false);
@@ -94,4 +102,4 @@ const getProjectData = async (url = '') => {
 
 export { isDateInPast, isDateValid, daysBetweenDates, 
          makeAsyncServerPost, getProjectData, makeWeatherElement,
-         padToDigits, dateFormatted }
+         padToDigits, dateFormatted, getClosestIndex }
