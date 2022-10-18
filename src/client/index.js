@@ -1,4 +1,3 @@
-import { checkForName } from './js/nameChecker'
 import { addTrip, updateUI } from './js/formHandler'
 import img from './media/confused_dog.jpg'
 
@@ -38,10 +37,4 @@ import './styles/base.scss'
 import './styles/footer.scss'
 import './styles/resets.scss'
 
-
-// console.log(checkForName);
-
 export { addTrip, updateUI }
-
-// alert("I EXIST")
-console.log("CHANGE!!");
